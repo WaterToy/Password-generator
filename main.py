@@ -25,7 +25,7 @@ def Password_generate(cha1, cha2, cha3):
     letter.insert(AB%10, cha3)
     c = ''
     for i in letter:
-        c += str(letter)
+        c += str(i)
     password = c + str(AB)
     return password
 
