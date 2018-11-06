@@ -6,8 +6,9 @@ def Cal_loc(a):
 # 由 character 1 计算得到数字AB,A+B
 def Cal_AB(cha1):
     lis = map(Cal_loc, cha1)
-    AB = sum(lis)%100
-    A_B = sum(lis)%10 + sum(lis)%100//10
+    tmp_ab = sum(lis)%100
+    AB = '0'+str(tmp_ab) if len(str(tmp_ab)) == 1 else str(tmp_ab)
+    A_B = int(AB[0])+int(AB[1])
     return AB, A_B
 
 # 特征2位移A+B位
@@ -22,11 +23,11 @@ def Shift_cha2(cha2, A_B):
 def Password_generate(cha1, cha2, cha3):
     AB, A_B = Cal_AB(cha1)
     letter = Shift_cha2(cha2, A_B)
-    letter.insert(AB%10, cha3)
+    letter.insert(int(AB[1]), cha3)
     c = ''
     for i in letter:
         c += str(i)
-    password = c + str(AB)
+    password = c + AB
     return password
 
 print('''
@@ -38,7 +39,7 @@ print('''
 cha1 = input("请输入特征1：")
 cha2 = input("请输入特征2：")
 cha2 = 'chenchuan' if not len(cha2) else cha2
-cha3 = input("是否将‘.’加入密码中： yes/no\n--->")
+cha3 = input("是否将‘.’加入密码中，默认加入，若不加入，则输入no\n--->")
 cha3 = '.' if not len(cha3) else ''
 password = Password_generate(cha1, cha2, cha3)
 print('密码：\n', password)
